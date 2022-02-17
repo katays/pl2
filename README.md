@@ -1,7 +1,7 @@
 # pl2
 
 link to tutorial: 
-github: 
+github: https://github.com/katays/pl2/blob/main/tutorial.html /
 webpage:
 
 
