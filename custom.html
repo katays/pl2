@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+ <!-- modifying the basemap and adding a polygon-->
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <title>Tommy Thompson Park</title>
+  
+      <style>
+        html,
+        body,
+        #viewDiv {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+      </style>
+  
+      <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+      <script src="https://js.arcgis.com/4.22/"></script>
+  
+      <script>
+
+          //map layer and graphics layer added in to the map 
+
+        require([
+            "esri/config",
+            "esri/Map", 
+            "esri/views/MapView",
+            "esri/Graphic",
+            "esri/layers/GraphicsLayer"], function (esriConfig,Map, MapView,Graphic,GraphicsLayer) {
+
+        //use api created for the tutorials
+  
+          esriConfig.apiKey = "AAPK8a893ad83b414ae29ba7923662178848ba3FoHEQi2EW4qW0OrYVS2ngkT7e7NxhK3BhUCjrKkLz36W6jJ0MJrLi9YYKGuFU";
+  
+          const map = new Map({
+            basemap: "arcgis-topographic" // Basemap layer service
+          });
+  
+          const view = new MapView({
+            map: map,
+            //change the centre and the zoom of the map 
+            center: [-79.3441, 43.6370], // Longitude, latitude
+            zoom: 12, // Zoom level
+            container: "viewDiv" // Div element
+          });
+
+          const graphicsLayer = new GraphicsLayer();
+          map.add(graphicsLayer);
+        //change the latitude and longitude to make the polygon over tommy thompson park 
+          const polygon = {
+         type: "polygon",
+         rings: [
+        [-79.31714, 43.65530], //Longitude, latitude
+        [-79.32188, 43.61183], //Longitude, latitude
+        [-79.35566, 43.61610], //Longitude, latitude
+       
+    ]
+ };
+
+    const simpleFillSymbol = {
+      type: "simple-fill",
+      color: [217,162,224, 0.5],  // change the colour to lavender with opacity 50%
+      outline: {
+        color: [255, 255, 255], //white
+        width: 1
+    }
+
+         };
+
+    const polygonGraphic = new Graphic({
+    geometry: polygon,
+    symbol: simpleFillSymbol,
+
+ });
+ graphicsLayer.add(polygonGraphic);
+
+        });
+      </script>
+  
+    </head>
+    <body>
+      <div id="viewDiv"></div>
+    </body>
+  </html>
